@@ -1072,6 +1072,7 @@ async function finetune_cancel() {
 }
 
 var last_lx = 0, last_ly = 0, last_rx = 0, last_ry = 0;
+var signed_lx = 0, signed_ly = 0, signed_rx = 0, signed_ry = 0;
 var ll_updated = false;
 
 var ll_data=new Array(48);
@@ -1205,8 +1206,6 @@ function refresh_stick_pos() {
     var ply = last_ly;
     var prx = last_rx;
     var pry = last_ry;
-
-    var signed_lx = 0, signed_ly = 0, signed_rx = 0, signed_ry = 0;
 
     if(enable_circ_test) {
         var pld = Math.sqrt(plx*plx + ply*ply);
