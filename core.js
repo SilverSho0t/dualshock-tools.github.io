@@ -45,6 +45,11 @@ var available_langs = {
     "zh_tw": { "name": "中文(繁)", "file": "zh_tw.json", "direction": "ltr"}
 };
 
+function convertToSigned8Bit(value) {
+    // Convertir la valeur en 8 bits signé
+    return value > 127 ? value - 256 : value;
+}
+
 function buf2hex(buffer) {
   return [...new Uint8Array(buffer)].map(x => x.toString(16).padStart(2, '0')) .join('');
 }
@@ -1201,6 +1206,8 @@ function refresh_stick_pos() {
     var prx = last_rx;
     var pry = last_ry;
 
+    var signed_lx = 0, signed_ly = 0, signed_rx = 0, signed_ry = 0
+
     if(enable_circ_test) {
         var pld = Math.sqrt(plx*plx + ply*ply);
         var pla = (parseInt(Math.round(Math.atan2(ply, plx) * MAX_N / 2.0 / Math.PI)) + MAX_N) % MAX_N;
@@ -1236,10 +1243,10 @@ function refresh_stick_pos() {
     ctx.stroke();
 
     var lbl = "", lbx = "";
-    $("#lx-lbl").text(float_to_str(plx));
-    $("#ly-lbl").text(float_to_str(ply));
-    $("#rx-lbl").text(float_to_str(prx));
-    $("#ry-lbl").text(float_to_str(pry));
+    $("#lx-lbl").text(signed_lx.toString());
+    $("#ly-lbl").text(signed_ly.toString());
+    $("#rx-lbl").text(signed_rx.toString());
+    $("#ry-lbl").text(signed_ry.toString());
 
     if(enable_circ_test) {
         var ofl = 0, ofr = 0, lcounter = 0, rcounter = 0;
@@ -1365,6 +1372,11 @@ function process_ds4_input(data) {
     var rx = data.data.getUint8(2);
     var ry = data.data.getUint8(3);
 
+    signed_lx = convertToSigned8Bit(lx);
+    signed_ly = convertToSigned8Bit(ly);
+    signed_rx = convertToSigned8Bit(rx);
+    signed_ry = convertToSigned8Bit(ry);
+
     var new_lx = Math.round((lx - 127.5) / 128 * 100) / 100;
     var new_ly = Math.round((ly - 127.5) / 128 * 100) / 100;
     var new_rx = Math.round((rx - 127.5) / 128 * 100) / 100;
@@ -1422,6 +1434,11 @@ function process_ds_input(data) {
     var ly = data.data.getUint8(1);
     var rx = data.data.getUint8(2);
     var ry = data.data.getUint8(3);
+
+    signed_lx = convertToSigned8Bit(lx);
+    signed_ly = convertToSigned8Bit(ly);
+    signed_rx = convertToSigned8Bit(rx);
+    signed_ry = convertToSigned8Bit(ry);
 
     var new_lx = Math.round((lx - 127.5) / 128 * 100) / 100;
     var new_ly = Math.round((ly - 127.5) / 128 * 100) / 100;
