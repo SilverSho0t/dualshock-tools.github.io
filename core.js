@@ -1372,10 +1372,10 @@ function process_ds4_input(data) {
     var rx = data.data.getUint8(2);
     var ry = data.data.getUint8(3);
 
-    signed_lx = convertToSigned8Bit(lx);
-    signed_ly = convertToSigned8Bit(ly);
-    signed_rx = convertToSigned8Bit(rx);
-    signed_ry = convertToSigned8Bit(ry);
+    var signed_lx = convertToSigned8Bit(lx);
+    var signed_ly = convertToSigned8Bit(ly);
+    var signed_rx = convertToSigned8Bit(rx);
+    var signed_ry = convertToSigned8Bit(ry);
 
     var new_lx = Math.round((lx - 127.5) / 128 * 100) / 100;
     var new_ly = Math.round((ly - 127.5) / 128 * 100) / 100;
@@ -1435,10 +1435,10 @@ function process_ds_input(data) {
     var rx = data.data.getUint8(2);
     var ry = data.data.getUint8(3);
 
-    signed_lx = convertToSigned8Bit(lx);
-    signed_ly = convertToSigned8Bit(ly);
-    signed_rx = convertToSigned8Bit(rx);
-    signed_ry = convertToSigned8Bit(ry);
+    var signed_lx = convertToSigned8Bit(lx);
+    var signed_ly = convertToSigned8Bit(ly);
+    var signed_rx = convertToSigned8Bit(rx);
+    var signed_ry = convertToSigned8Bit(ry);
 
     var new_lx = Math.round((lx - 127.5) / 128 * 100) / 100;
     var new_ly = Math.round((ly - 127.5) / 128 * 100) / 100;
