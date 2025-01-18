@@ -1375,10 +1375,10 @@ function process_ds4_input(data) {
     console.log(`Raw values - lx: ${lx}, ly: ${ly}, rx: ${rx}, ry: ${ry}`);
 
     // Transformer les valeurs en valeurs signées
-    var signed_lx = lx < 128 ? lx : lx - 256;
-    var signed_ly = ly < 128 ? ly : ly - 256;
-    var signed_rx = rx < 128 ? rx : rx - 256;
-    var signed_ry = ry < 128 ? ry : ry - 256;
+    signed_lx = lx < 128 ? lx : lx - 256;
+    signed_ly = ly < 128 ? ly : ly - 256;
+    signed_rx = rx < 128 ? rx : rx - 256;
+    signed_ry = ry < 128 ? ry : ry - 256;
 
     // Log des valeurs transformées pour déboguer
     console.log(`Signed values - signed_lx: ${signed_lx}, signed_ly: ${signed_ly}, signed_rx: ${signed_rx}, signed_ry: ${signed_ry}`);
@@ -1445,10 +1445,10 @@ function process_ds_input(data) {
     console.log(`Raw values - lx: ${lx}, ly: ${ly}, rx: ${rx}, ry: ${ry}`);
 
     // Transformer les valeurs en valeurs signées
-    var signed_lx = lx < 128 ? lx : lx - 256;
-    var signed_ly = ly < 128 ? ly : ly - 256;
-    var signed_rx = rx < 128 ? rx : rx - 256;
-    var signed_ry = ry < 128 ? ry : ry - 256;
+    signed_lx = lx < 128 ? lx : lx - 256;
+    signed_ly = ly < 128 ? ly : ly - 256;
+    signed_rx = rx < 128 ? rx : rx - 256;
+    signed_ry = ry < 128 ? ry : ry - 256;
 
     // Log des valeurs transformées pour déboguer
     console.log(`Signed values - signed_lx: ${signed_lx}, signed_ly: ${signed_ly}, signed_rx: ${signed_rx}, signed_ry: ${signed_ry}`);
