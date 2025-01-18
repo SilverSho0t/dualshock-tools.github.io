@@ -1206,7 +1206,7 @@ function refresh_stick_pos() {
     var prx = last_rx;
     var pry = last_ry;
 
-    var signed_lx = 0, signed_ly = 0, signed_rx = 0, signed_ry = 0
+    var signed_lx = 0, signed_ly = 0, signed_rx = 0, signed_ry = 0;
 
     if(enable_circ_test) {
         var pld = Math.sqrt(plx*plx + ply*ply);
@@ -1372,10 +1372,17 @@ function process_ds4_input(data) {
     var rx = data.data.getUint8(2);
     var ry = data.data.getUint8(3);
 
-    var signed_lx = convertToSigned8Bit(lx);
-    var signed_ly = convertToSigned8Bit(ly);
-    var signed_rx = convertToSigned8Bit(rx);
-    var signed_ry = convertToSigned8Bit(ry);
+    // Log des valeurs brutes pour déboguer
+    console.log(`Raw values - lx: ${lx}, ly: ${ly}, rx: ${rx}, ry: ${ry}`);
+
+    // Transformer les valeurs en valeurs signées
+    var signed_lx = lx < 128 ? lx : lx - 256;
+    var signed_ly = ly < 128 ? ly : ly - 256;
+    var signed_rx = rx < 128 ? rx : rx - 256;
+    var signed_ry = ry < 128 ? ry : ry - 256;
+
+    // Log des valeurs transformées pour déboguer
+    console.log(`Signed values - signed_lx: ${signed_lx}, signed_ly: ${signed_ly}, signed_rx: ${signed_rx}, signed_ry: ${signed_ry}`);
 
     var new_lx = Math.round((lx - 127.5) / 128 * 100) / 100;
     var new_ly = Math.round((ly - 127.5) / 128 * 100) / 100;
@@ -1435,10 +1442,17 @@ function process_ds_input(data) {
     var rx = data.data.getUint8(2);
     var ry = data.data.getUint8(3);
 
-    var signed_lx = convertToSigned8Bit(lx);
-    var signed_ly = convertToSigned8Bit(ly);
-    var signed_rx = convertToSigned8Bit(rx);
-    var signed_ry = convertToSigned8Bit(ry);
+    // Log des valeurs brutes pour déboguer
+    console.log(`Raw values - lx: ${lx}, ly: ${ly}, rx: ${rx}, ry: ${ry}`);
+
+    // Transformer les valeurs en valeurs signées
+    var signed_lx = lx < 128 ? lx : lx - 256;
+    var signed_ly = ly < 128 ? ly : ly - 256;
+    var signed_rx = rx < 128 ? rx : rx - 256;
+    var signed_ry = ry < 128 ? ry : ry - 256;
+
+    // Log des valeurs transformées pour déboguer
+    console.log(`Signed values - signed_lx: ${signed_lx}, signed_ly: ${signed_ly}, signed_rx: ${signed_rx}, signed_ry: ${signed_ry}`);
 
     var new_lx = Math.round((lx - 127.5) / 128 * 100) / 100;
     var new_ly = Math.round((ly - 127.5) / 128 * 100) / 100;
